@@ -1,5 +1,6 @@
 package com.dmalki.myfirstapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -8,6 +9,8 @@ import android.graphics.Color;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -130,7 +133,29 @@ public class MainActivity extends AppCompatActivity /*implements CompoundButton.
 
     }
 
-//    @Override
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if(id == R.id.action_login){
+            Toast.makeText(this, "you selected login", Toast.LENGTH_SHORT).show();
+        }
+        else if(id == R.id.action_register){
+            Toast.makeText(this, "you selected register", Toast.LENGTH_SHORT).show();
+        }
+        else if(id == R.id.action_start){
+            Toast.makeText(this, "you selected start", Toast.LENGTH_SHORT).show();
+        }
+        return true;
+    }
+
+    //    @Override
 //    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //        if(isChecked){
 //            constraintLayout.setBackgroundColor(color."#033A2D");
