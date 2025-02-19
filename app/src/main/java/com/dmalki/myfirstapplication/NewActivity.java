@@ -3,6 +3,7 @@ package com.dmalki.myfirstapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.os.CountDownTimer;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,21 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class NewActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_new);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }
+    private ImageView timerImage; // משתנה גלובלי לתמונה
 
-    ImageView timerImage = findViewById(R.id.timer_image);
-
-    final int[] images = {
+    private final int[] images = {
             R.drawable.number_5,
             R.drawable.number_4,
             R.drawable.number_3,
@@ -34,18 +23,39 @@ public class NewActivity extends AppCompatActivity {
             R.drawable.number_1
     };
 
-        /*new CountDownTimer(5000, 1000) {
-        int i = 0;
-        public void onTick(long millisUntilFinished) {
-            timerImage.setImageResource(images[i]);
-            i++;
-        }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_new);
 
-        public void onFinish() {
-            Intent intent = new Intent(NewActivity.this, NextActivity.class);
-            startActivity(intent);
-        }
-    }.start(); */
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
+        // אתחול של timerImage בתוך onCreate
+        timerImage = findViewById(R.id.timer_image);
 
+        // הפעלת הטיימר בתוך onCreate
+        new CountDownTimer(5000, 1000) {
+            int index = 0;
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (index < images.length) {
+                    timerImage.setImageResource(images[index]);
+                    index++;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                Intent intent = new Intent(NewActivity.this, NextActivity.class);
+                startActivity(intent);
+                finish(); // סוגר את הפעילות הנוכחית כדי שלא תחזור אחורה
+            }
+        }.start();
+    }
 }

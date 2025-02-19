@@ -152,17 +152,11 @@ public class MainActivity extends AppCompatActivity /*implements CompoundButton.
         else if(id == R.id.action_start){
             Toast.makeText(this, "you selected start", Toast.LENGTH_SHORT).show();
         }
-        return true;
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.new_item) {
+        else if(item.getItemId() == R.id.new_item) {
             Intent intent = new Intent(this, NewActivity.class);
             startActivity(intent);
-            return true;
         }
-        return super.onContextItemSelected(item);
+        return true;
     }
 
 
