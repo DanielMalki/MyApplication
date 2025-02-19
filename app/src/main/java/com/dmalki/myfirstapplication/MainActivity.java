@@ -155,6 +155,17 @@ public class MainActivity extends AppCompatActivity /*implements CompoundButton.
         return true;
     }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.new_item) {
+            Intent intent = new Intent(this, NewActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+
     //    @Override
 //    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //        if(isChecked){
