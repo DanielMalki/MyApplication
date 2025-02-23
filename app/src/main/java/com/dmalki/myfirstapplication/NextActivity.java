@@ -1,6 +1,7 @@
 package com.dmalki.myfirstapplication;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class NextActivity extends AppCompatActivity {
+
+    Button sendBTN;
+    Button readBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
