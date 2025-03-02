@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +22,9 @@ public class NextActivity extends AppCompatActivity {
     EditText ETInt;
     Button readBTN;
     TextView raedString;
-    TextClock raedInt;
+    TextView raedInt;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,33 +45,31 @@ public class NextActivity extends AppCompatActivity {
     private void initViews() {
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         editor = pref.edit();
-        editor.putString("STR", ""); // Storing string
-        editor.putInt("INT", -1); // Storing integer
-        editor.commit(); // commit changes
-
-        editor.commit();
 
         sendBTN = findViewById(R.id.sendBTN);
         ETString = findViewById(R.id.ETString);
         ETInt = findViewById(R.id.ETInt);
+
         sendBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putString("STR", String.valueOf(ETString.getText()));
-                editor.putInt("INT", Integer.parseInt(String.valueOf(ETInt.getText())));
-                editor.commit();
-                Toast.makeText(NextActivity.this, "information sent successfully", Toast.LENGTH_SHORT).show();
+                editor.putString("STR", String.valueOf(ETString.getText()));  // Store the string with the key "STR"
+                editor.putInt("INT", Integer.parseInt(String.valueOf(ETInt.getText())));  // Store the integer with the key "INT"
+                editor.apply();  // Use apply() instead of commit() for better performance
+                Toast.makeText(NextActivity.this, "Information sent successfully", Toast.LENGTH_SHORT).show();
             }
         });
 
         readBTN = findViewById(R.id.readBTN);
         raedString = findViewById(R.id.raedString);
         raedInt = findViewById(R.id.readInt);
+
         readBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                raedString.setText(pref.getString("key_name", null));
-                raedInt.setText(pref.getInt("key_name", -1));
+                // Retrieve the stored string and integer using the correct keys
+                raedString.setText(pref.getString("STR", "No data found"));  // Default value if no data is found
+                raedInt.setText(String.valueOf(pref.getInt("INT", -1)));  // Default value if no data is found
             }
         });
     }
