@@ -56,9 +56,9 @@ public class LiniarActivity extends AppCompatActivity {
         backPG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LiniarActivity.this, MainActivity.class);
+                //Intent intent = new Intent(LiniarActivity.this, MainActivity.class);
                 finish();
-                startActivity(intent);
+                //startActivity(intent);
             }
         });
 

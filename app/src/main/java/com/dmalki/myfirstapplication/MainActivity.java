@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity /*implements CompoundButton.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LiniarActivity.class);
-                finish();
                 startActivity(intent);
             }
         });
@@ -154,6 +153,10 @@ public class MainActivity extends AppCompatActivity /*implements CompoundButton.
         }
         else if(item.getItemId() == R.id.new_item) {
             Intent intent = new Intent(this, NewActivity.class);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
         return true;
